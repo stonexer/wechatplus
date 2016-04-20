@@ -16,8 +16,8 @@
             },
             // 将日期过滤为 hour:minutes
             time (date) {
-                if (typeof date === 'string' || typeof date === 'number') {
-                    date = new Date(date);
+                if (typeof date === 'number') {
+                    date = new Date(date * 1000);
                 }
                 return date.getHours() + ':' + date.getMinutes();
             }

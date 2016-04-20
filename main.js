@@ -10,9 +10,9 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     title: 'wehchat+',
-    width: 800,
+    width: 1200,
     height: 600,
-    resizable: false,
+    resizable: true,
     center: true,
     show: true,
     frame: true,
@@ -30,7 +30,7 @@ function createWindow () {
   mainWindow.loadURL('file://' + __dirname + '/web/index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
 
   mainWindow.on('closed', function() {
     mainWindow = null

@@ -64,7 +64,7 @@ const mutations = {
     state.sessionList.find(session => session.UserName === to).messages.push({
       Content: content,
       self: true,
-      CreateTime: new Date()
+      CreateTime: +new Date() / 1000
     })
   }
 }

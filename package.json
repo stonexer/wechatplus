@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron main.js",
     "build": "webpack --config=./web/webpack.config.js",
-    "dev": "webpack -w --config=./web/webpack.config.js && npm run start"
+    "watch": "webpack -w --config=./web/webpack.config.js"
   },
   "repository": {
     "type": "git",

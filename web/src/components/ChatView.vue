@@ -71,9 +71,6 @@ export default {
     width: 200px;
     color: #f4f4f4;
     background-color: #2e3238;
-    overflow: scroll;
-    overflow-x:hidden;
-    overflow-y:auto;
   }
   .main {
     position: relative;

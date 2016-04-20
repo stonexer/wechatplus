@@ -27,6 +27,10 @@
 
 <style lang="less">
     .m-list {
+        height: unit(600 - 121, px);
+        overflow: scroll;
+        overflow-x:hidden;
+        overflow-y:auto;
         li {
             padding: 12px 15px;
             border-bottom: 1px solid #292C33;
