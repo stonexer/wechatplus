@@ -6,7 +6,7 @@ const BrowserWindow = electron.BrowserWindow
 
 let mainWindow
 
-function createWindow () {
+var createWindow = function () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     title: 'wehchat+',
@@ -23,7 +23,7 @@ function createWindow () {
       javascript: true,
       plugins: true,
       nodeIntegration: false,
-      webSecurity: false,
+      webSecurity: false
     }
   })
 
@@ -32,7 +32,7 @@ function createWindow () {
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
 
-  mainWindow.on('closed', function() {
+  mainWindow.on('closed', function () {
     mainWindow = null
   })
 }

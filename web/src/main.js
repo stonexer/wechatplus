@@ -15,11 +15,11 @@ router.map({
     component: LoginView
   },
   '/chat': {
-  	component: ChatView
+    component: ChatView
   }
 })
 
-router.beforeEach(function() {
+router.beforeEach(function () {
   window.scrollTo(0, 0)
 })
 

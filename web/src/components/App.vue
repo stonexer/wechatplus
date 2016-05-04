@@ -1,7 +1,9 @@
+
+
 <template>
 
-  <router-view>
-  </router-view>
+<router-view>
+</router-view>
 
 </template>
 
@@ -10,17 +12,16 @@
 import store from '../vuex/store'
 
 module.exports = {
-  
+
   store,
-  
-	data () {
-		return {
-			name: 'wechat+',
-		}
-	},
-  
-  events: {
-  }
+
+  data() {
+      return {
+        name: 'wechat+',
+      }
+    },
+
+    events: {}
 }
 
 </script>

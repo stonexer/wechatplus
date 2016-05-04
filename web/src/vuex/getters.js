@@ -1,23 +1,11 @@
-export function getCount (state) {
-  return state.count
-}
+export const getCount = state => state.count
 
-export function getWechatState (state) {
-  return state.wechatState
-}
+export const getWechatState = state => state.wechatState
 
-export function getUUID (state) {
-  return state.uuid
-}
+export const getUUID = state => state.uuid
 
-export function getUserInfo (state) {
-  return state.user
-}
+export const getUserInfo = state => state.user
 
-export function getMemberList (state) {
-  return state.memberList
-}
+export const getMemberList = state => state.memberList
 
-export function getSessionList (state) {
-  return state.sessionList
-}
+export const getSessionList = state => state.sessionList
