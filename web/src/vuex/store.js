@@ -41,6 +41,7 @@ const mutations = {
     for (let member of friendList) {
       state.sessionList.push({
         username: member['username'],
+        nickname: member['nickname'],
         messages: []
       })
     }

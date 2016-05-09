@@ -1,5 +1,9 @@
 <style lang="less">
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 #chat {
   width: 800px;
   height: 600px;
@@ -29,6 +33,13 @@
   .m-message {
     height: ~'calc(100% - 160px)';
   }
+  .m-title {
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #2e3238;
+    color: #FFF;
+  }
 }
 
 </style>
@@ -41,6 +52,7 @@
     <list :user-list="memberList" :session="session" :session-index.sync="sessionIndex" :search="search"></list>
   </div>
   <div class="main">
+    <title :session="session"></title>
     <message :session="session" :user="userInfo" :user-list="memberList"></message>
     <text :session="session"></text>
   </div>
@@ -54,6 +66,7 @@ import card from './Chat/card.vue'
 import list from './Chat/list.vue'
 import text from './Chat/text.vue'
 import message from './Chat/message.vue'
+import title from './Chat/title.vue'
 
 import {
   getWechatState, getMemberList, getUserInfo, getSessionList
@@ -63,7 +76,7 @@ from '../vuex/getters'
 export default {
 
   components: {
-    card, list, text, message
+    card, list, text, message, title
   },
 
   data() {
