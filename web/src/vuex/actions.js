@@ -9,23 +9,24 @@ export const wechatStart = function ({
   wechat = new Wechat4u()
 
   wechat.on('uuid', uuid => {
-    console.log('GET UUID')
     dispatch('UUID', uuid)
   })
 
   wechat.on('scan', () => {
-    console.log('SCAN')
     dispatch('SCAN')
   })
 
   wechat.on('confirm', () => {
-    console.log('CONFIRM')
     dispatch('CONFIRM')
   })
 
   wechat.on('login', () => {
     dispatch('USERINFO', wechat.user)
-    dispatch('LOGIN', wechat.contactList)
+
+    setTimeout(() => {
+      dispatch('FRIEND_LIST', wechat.friendList)
+      dispatch('LOGIN')
+    },0)
   })
 
   wechat.on('logout', () => {

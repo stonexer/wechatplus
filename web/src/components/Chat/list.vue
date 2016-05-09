@@ -26,6 +26,7 @@
   }
   .name {
     display: inline-block;
+    max-width: 120px;
     margin: 0 0 0 15px;
   }
 }
@@ -36,9 +37,9 @@
 
 <div class="m-list">
   <ul>
-    <li v-for="item in userList | search" :class="{ active: session.UserName === item.UserName }" @click="select(item)">
-      <img class="avatar" width="30" height="30" :alt="item.NickName" :src="'http://wx2.qq.com' + item.HeadImgUrl">
-      <p class="name">{{item.NickName}}</p>
+    <li v-for="item in userList | search" :class="{ active: session.username === item.username }" @click="select(item)">
+      <img class="avatar" width="30" height="30" :alt="item.nickname" :src="item.avatar">
+      <p class="name">{{item.nickname}}</p>
     </li>
   </ul>
 </div>
@@ -56,7 +57,7 @@ export default {
   },
   filters: {
     search(list) {
-      return list.filter(item => item.NickName.indexOf(this.search) > -1);
+      return list.filter(item => item.nickname.indexOf(this.search) > -1);
     }
   }
 };

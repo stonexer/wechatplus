@@ -39,13 +39,8 @@ export default {
   },
   methods: {
     inputing(e) {
-      if (e.ctrlKey && e.keyCode === 13 && this.text.length) {
-        // this.session.messages.push({
-        //     Content: this.text,
-        //     date: new Date(),
-        //     self: true
-        // });
-        this.send(this.text, this.session.UserName)
+      if (e.keyCode === 13 && this.text.length) {
+        this.send(this.text, this.session.username)
         this.text = ''
       }
     }

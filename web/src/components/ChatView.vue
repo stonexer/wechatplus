@@ -94,9 +94,7 @@ export default {
       sessionList: getSessionList,
       userInfo: getUserInfo
     },
-    actions: {
-
-    }
+    actions: {}
   }
 }
 

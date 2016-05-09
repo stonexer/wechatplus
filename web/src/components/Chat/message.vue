@@ -86,7 +86,7 @@ export default {
   props: ['session', 'user', 'userList'],
   computed: {
     sessionUser() {
-      let users = this.userList.filter(item => item.UserName === this.session.UserName)
+      let users = this.userList.filter(item => item.username === this.session.username)
       return users[0]
     }
   },
@@ -95,7 +95,7 @@ export default {
     avatar(item) {
         // 如果是自己发的消息显示登录用户的头像
         let user = item.self ? this.user : this.sessionUser
-        return 'http://wx2.qq.com' + user.HeadImgUrl
+        return user.avatar
       },
       // 将日期过滤为 hour:minutes
       time(date) {
@@ -108,7 +108,9 @@ export default {
   directives: {
     // 发送消息后滚动到底部
     'scroll-bottom' () {
-      this.el.scrollTop = this.el.scrollHeight - this.el.clientHeight
+      setTimeout(() => {
+        this.el.scrollTop = this.el.scrollHeight - this.el.clientHeight
+      }, 10)
     }
   }
 }

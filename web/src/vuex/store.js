@@ -10,44 +10,43 @@ const state = {
 
   user: {},
   memberList: [],
-  sessionList: []
+  sessionList: [],
 }
 
 const mutations = {
-  INCREMENT (state, amount) {
-    state.count = state.count + amount
-  },
-
   UUID (state, uuid) {
     state.uuid = uuid
     state.wechatState = 'uuid'
   },
 
   SCAN (state) {
-    console.log('mutation scan')
     state.wechatState = 'scan'
   },
 
   CONFIRM (state) {
-    console.log('mutation confirm')
     state.wechatState = 'confirm'
   },
 
   USERINFO (state, user) {
-    console.log('userinfo', user)
     state.user = user
   },
 
-  LOGIN (state, memberList) {
+  LOGIN (state) {
     state.wechatState = 'login'
-    state.memberList = memberList
+  },
 
-    for (let member of memberList) {
+  FRIEND_LIST (state, friendList) {
+    state.memberList = friendList
+
+    for (let member of friendList) {
       state.sessionList.push({
-        UserName: member['UserName'],
+        username: member['username'],
         messages: []
       })
     }
+
+    state.user.avatar = friendList.find(member => member.username === state.user.UserName).avatar
+    console.log(state.user.avatar)
   },
 
   LOGINERROR (state, err) {
@@ -56,14 +55,16 @@ const mutations = {
 
   TEXTMESSAGE (state, message) {
     console.log('text-message', message)
-
-    if (message.FromUserName !== state.user.UserName && message.ToUserName === state.user.UserName) {
-      state.sessionList.find(session => session.UserName === message.FromUserName).messages.push(message)
+    if (message.ToUserName === state.user.UserName) {
+      // 收件人为自己
+      state.sessionList.find(session => session.username === message.FromUserName).messages.push(message)
+    } else if (message.FromUserName == state.user.UserName) {
+      state.sessionList.find(session => session.username === message.ToUserName).messages.push(message)
     }
   },
 
   SENDMESSAGE (state, content, to) {
-    state.sessionList.find(session => session.UserName === to).messages.push({
+    state.sessionList.find(session => session.username === to).messages.push({
       Content: content,
       self: true,
       CreateTime: +new Date() / 1000
