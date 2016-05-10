@@ -52,7 +52,11 @@ export const sendMessage = function ({
 }, content, to) {
   wechat.sendMsg(content, to)
 
-  dispatch('SENDMESSAGE', content, to)
+  dispatch('TEXTMESSAGE', {
+    ToUserName: to,
+    Content: content,
+    CreateTime: +new Date() / 1000
+  })
 }
 
 export const changeSearchQuery = function ({
