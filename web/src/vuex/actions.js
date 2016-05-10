@@ -61,3 +61,10 @@ export const changeSearchQuery = function ({
 }, query) {
   dispatch('CHANGE_SEARCH_QUERY', query)
 }
+
+export const selectMember = function ({
+  dispatch,
+  state
+}, username) {
+  dispatch('SELECT_MEMBER', username)
+}

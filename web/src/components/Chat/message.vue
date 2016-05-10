@@ -82,28 +82,32 @@
 
 <script>
 
+import {
+  getMemberList
+} from '../../vuex/getters'
+
 export default {
-  props: ['session', 'user', 'userList'],
+  props: ['session', 'user'],
   computed: {
     sessionUser() {
-      let users = this.userList.filter(item => item.username === this.session.username)
+      let users = this.memberList.filter(item => item.username === this.session.username)
       return users[0]
     }
   },
   filters: {
     // 筛选出用户头像
     avatar(item) {
-        // 如果是自己发的消息显示登录用户的头像
-        let user = item.self ? this.user : this.sessionUser
-        return user.avatar
-      },
-      // 将日期过滤为 hour:minutes
-      time(date) {
-        if (typeof date === 'number') {
-          date = new Date(date * 1000)
-        }
-        return date.getHours() + ':' + date.getMinutes()
+      // 如果是自己发的消息显示登录用户的头像
+      let user = item.self ? this.user : this.sessionUser
+      return user.avatar
+    },
+    // 将日期过滤为 hour:minutes
+    time(date) {
+      if (typeof date === 'number') {
+        date = new Date(date * 1000)
       }
+      return date.getHours() + ':' + date.getMinutes()
+    }
   },
   directives: {
     // 发送消息后滚动到底部
@@ -111,6 +115,11 @@ export default {
       setTimeout(() => {
         this.el.scrollTop = this.el.scrollHeight - this.el.clientHeight
       }, 10)
+    }
+  },
+  vuex: {
+    getters: {
+      memberList: getMemberList
     }
   }
 }

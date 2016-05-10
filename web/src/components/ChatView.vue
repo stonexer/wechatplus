@@ -31,7 +31,7 @@
     left: 0;
   }
   .m-message {
-    height: ~'calc(100% - 150 - 30px)';
+    height: ~'calc(100% - 180px)';
   }
   .m-title {
     height: 30px;
@@ -48,12 +48,12 @@
 
 <div id="chat">
   <div class="sidebar">
-    <card :user="userInfo"></card>
-    <list :user-list="memberList" :session="session" :session-index.sync="sessionIndex"></list>
+    <card :user="user"></card>
+    <list :session="session"></list>
   </div>
   <div class="main">
     <title :session="session"></title>
-    <message :session="session" :user="userInfo" :user-list="memberList"></message>
+    <message :session="session" :user="user"></message>
     <text :session="session"></text>
   </div>
 </div>
@@ -70,9 +70,8 @@ import title from './Chat/title.vue'
 
 import {
   getWechatState,
-  getMemberList,
-  getUserInfo,
-  getSessionList,
+  getSession,
+  getUserInfo
 }
 from '../vuex/getters'
 
@@ -80,18 +79,6 @@ export default {
 
   components: {
     card, list, text, message, title
-  },
-
-  data() {
-    return {
-      sessionIndex: 0,
-    }
-  },
-
-  computed: {
-    session() {
-      return this.sessionList[this.sessionIndex];
-    }
   },
 
   watch: {
@@ -105,9 +92,8 @@ export default {
   vuex: {
     getters: {
       wechatState: getWechatState,
-      memberList: getMemberList,
-      sessionList: getSessionList,
-      userInfo: getUserInfo
+      session: getSession,
+      user: getUserInfo
     },
     actions: {}
   }

@@ -28,8 +28,7 @@
 
 import {
   sendMessage
-}
-from '../../vuex/actions'
+} from '../../vuex/actions'
 
 export default {
   props: ['session'],
@@ -40,7 +39,7 @@ export default {
   },
   methods: {
     inputing(e) {
-      if (e.keyCode === 13 && this.text.length) {
+      if (e.keyCode === 13 && this.text.length > 1) {
         this.send(this.text, this.session.username)
         this.text = ''
       }

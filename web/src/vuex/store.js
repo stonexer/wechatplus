@@ -11,7 +11,8 @@ const state = {
   memberList: [],
   sessionList: [],
 
-  query: ''
+  query: '',
+  session: null
 }
 
 const mutations = {
@@ -53,6 +54,8 @@ const mutations = {
         messages: []
       })
     }
+
+    state.session = state.sessionList[0]
     // 登陆用户头像
     state.user.avatar = friendList.find(member => member.username === state.user.UserName).avatar
   },
@@ -80,6 +83,10 @@ const mutations = {
   // 界面
   CHANGE_SEARCH_QUERY (state, query) {
     state.query = query
+  },
+
+  SELECT_MEMBER (state, username) {
+    state.session = state.sessionList.find(session => session.username === username)
   }
 }
 

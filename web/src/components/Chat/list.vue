@@ -37,7 +37,7 @@
 
 <div class="m-list">
   <ul>
-    <li v-for="item in userList | search" :class="{ active: session.username === item.username }" @click="select(item)">
+    <li v-for="item in memberList | search" :class="{ active: session.username === item.username }" @click="select(item.username)">
       <img class="avatar" width="30" height="30" :alt="item.nickname" :src="item.avatar">
       <p class="name">{{item.nickname}}</p>
     </li>
@@ -49,26 +49,28 @@
 <script>
 
 import {
+  getMemberList,
   getSearchQuery
-}
-from '../../vuex/getters'
+} from '../../vuex/getters'
+
+import {
+  selectMember
+} from '../../vuex/actions'
 
 export default {
-  props: ['userList', 'sessionIndex', 'session'],
-  methods: {
-    select(value) {
-      this.sessionIndex = this.userList.indexOf(value);
-    }
-  },
+  props: ['sessionIndex', 'session'],
   filters: {
     search(list) {
-      console.log(list, this.query)
       return list.filter(item => item.nickname.indexOf(this.query) > -1);
     }
   },
   vuex: {
     getters: {
+      memberList: getMemberList,
       query: getSearchQuery
+    },
+    actions: {
+      select: selectMember
     }
   }
 };
