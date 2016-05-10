@@ -69,7 +69,7 @@
 <div class="m-message" v-scroll-bottom="session.messages">
   <ul>
     <li v-for="item in session.messages">
-      <p class="time"><span>{{item.CreateTime | time}}</span></p>
+      <p class="time" v-if="!session.messages[$index-1] || item.CreateTime > session.messages[$index-1].CreateTime + 60"><span>{{item.CreateTime | time}}</span></p>
       <div class="main" :class="{ self: item.self }">
         <img class="avatar" width="30" height="30" :src="item | avatar" />
         <div class="text">{{item.Content}}</div>
@@ -103,9 +103,7 @@ export default {
     },
     // 将日期过滤为 hour:minutes
     time(date) {
-      if (typeof date === 'number') {
-        date = new Date(date * 1000)
-      }
+      date = new Date(date * 1000)
       return date.getHours() + ':' + date.getMinutes()
     }
   },

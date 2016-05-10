@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     inputing(e) {
-      if (e.keyCode === 13 && this.text.length > 1) {
+      if (e.keyCode === 13 && this.text.replace(/(^\s*)|(\s*$)/g, "").length > 0) {
         this.send(this.text, this.session.username)
         this.text = ''
       }
