@@ -9,3 +9,5 @@ export const getUserInfo = state => state.user
 export const getMemberList = state => state.memberList
 
 export const getSessionList = state => state.sessionList
+
+export const getSearchQuery = state => state.query

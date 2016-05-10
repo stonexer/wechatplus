@@ -1,7 +1,7 @@
 <style lang="less">
 
 .m-text {
-  height: 160px;
+  height: 150px;
   border-top: solid 1px #ddd;
   textarea {
     padding: 10px;
@@ -19,7 +19,7 @@
 <template>
 
 <div class="m-text">
-  <textarea placeholder="按 Ctrl + Enter 发送" v-model="text" @keyup="inputing"></textarea>
+  <textarea placeholder="按 Enter 发送" v-model="text" @keyup="inputing"></textarea>
 </div>
 
 </template>
@@ -30,6 +30,7 @@ import {
   sendMessage
 }
 from '../../vuex/actions'
+
 export default {
   props: ['session'],
   data() {

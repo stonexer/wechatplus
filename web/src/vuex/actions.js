@@ -54,3 +54,10 @@ export const sendMessage = function ({
 
   dispatch('SENDMESSAGE', content, to)
 }
+
+export const changeSearchQuery = function ({
+  dispatch,
+  state
+}, query) {
+  dispatch('CHANGE_SEARCH_QUERY', query)
+}

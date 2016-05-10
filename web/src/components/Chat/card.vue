@@ -39,11 +39,11 @@
 
 <div class="m-card">
   <header>
-    <img class="avatar" width="40" height="40" :alt="user.NickName" :src="'http://wx2.qq.com' + user.HeadImgUrl">
+    <img class="avatar" width="40" height="40" :alt="user.NickName" :src="user.avatar">
     <p class="name">{{user.NickName}}</p>
   </header>
   <footer>
-    <input class="search" type="text" placeholder="search user..." v-model="search">
+    <input class="search" type="text" placeholder="搜索用户 ..." v-model="query">
   </footer>
 </div>
 
@@ -51,8 +51,31 @@
 
 <script>
 
+import {
+  changeSearchQuery
+}
+from '../../vuex/actions'
+
 export default {
-  props: ['user', 'search']
+  props: ['user'],
+
+  data() {
+    return {
+      query: '',
+    }
+  },
+
+  watch: {
+    query () {
+      this.changeSearchQuery(this.query)
+    }
+  },
+
+  vuex: {
+    actions: {
+      changeSearchQuery: changeSearchQuery
+    }
+  }
 };
 
 </script>

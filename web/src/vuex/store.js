@@ -4,16 +4,19 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  count: 0,
   wechatState: 'init',
   uuid: '',
 
-  user: {},
+  user: null,
   memberList: [],
   sessionList: [],
+
+  query: ''
 }
 
 const mutations = {
+
+  // 微信状态
   UUID (state, uuid) {
     state.uuid = uuid
     state.wechatState = 'uuid'
@@ -27,12 +30,17 @@ const mutations = {
     state.wechatState = 'confirm'
   },
 
-  USERINFO (state, user) {
-    state.user = user
-  },
-
   LOGIN (state) {
     state.wechatState = 'login'
+  },
+
+  LOGINERROR (state, err) {
+    state.wechatState = 'init'
+  },
+
+  // 用户数据
+  USERINFO (state, user) {
+    state.user = user
   },
 
   FRIEND_LIST (state, friendList) {
@@ -45,21 +53,18 @@ const mutations = {
         messages: []
       })
     }
-
+    // 登陆用户头像
     state.user.avatar = friendList.find(member => member.username === state.user.UserName).avatar
-    console.log(state.user.avatar)
   },
 
-  LOGINERROR (state, err) {
-    state.wechatState = 'init'
-  },
-
+  // 消息
   TEXTMESSAGE (state, message) {
-    console.log('text-message', message)
     if (message.ToUserName === state.user.UserName) {
       // 收件人为自己
       state.sessionList.find(session => session.username === message.FromUserName).messages.push(message)
     } else if (message.FromUserName == state.user.UserName) {
+      // 发件人为自己
+      message.self = true
       state.sessionList.find(session => session.username === message.ToUserName).messages.push(message)
     }
   },
@@ -70,6 +75,11 @@ const mutations = {
       self: true,
       CreateTime: +new Date() / 1000
     })
+  },
+
+  // 界面
+  CHANGE_SEARCH_QUERY (state, query) {
+    state.query = query
   }
 }
 

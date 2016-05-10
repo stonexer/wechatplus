@@ -48,8 +48,13 @@
 
 <script>
 
+import {
+  getSearchQuery
+}
+from '../../vuex/getters'
+
 export default {
-  props: ['userList', 'sessionIndex', 'session', 'search'],
+  props: ['userList', 'sessionIndex', 'session'],
   methods: {
     select(value) {
       this.sessionIndex = this.userList.indexOf(value);
@@ -57,7 +62,13 @@ export default {
   },
   filters: {
     search(list) {
-      return list.filter(item => item.nickname.indexOf(this.search) > -1);
+      console.log(list, this.query)
+      return list.filter(item => item.nickname.indexOf(this.query) > -1);
+    }
+  },
+  vuex: {
+    getters: {
+      query: getSearchQuery
     }
   }
 };
