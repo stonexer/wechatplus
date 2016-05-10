@@ -10,4 +10,4 @@ electron + vue + wechat4u
 
 使用了 [wechat4u](https://github.com/nodeWechat/wechat4u) 微信网页接口开发。
 
-> *目前还属于完全不能用的状态，仅用于实验。
+> *目前只能收发文字消息，欢迎尝试
