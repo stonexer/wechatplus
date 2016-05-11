@@ -72,8 +72,7 @@ import {
   getWechatState,
   getSession,
   getUserInfo
-}
-from '../vuex/getters'
+} from '../vuex/getters'
 
 export default {
 

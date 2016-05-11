@@ -45,16 +45,15 @@
 
 import {
   getUUID, getWechatState
-}
-from '../vuex/getters'
+} from '../vuex/getters'
+
 import {
   wechatStart
-}
-from '../vuex/actions'
+} from '../vuex/actions'
+
 import {
   progressbar
-}
-from 'vue-strap'
+} from 'vue-strap'
 
 module.exports = {
 

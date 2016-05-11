@@ -4,7 +4,7 @@
 
 electron + vue + wechat4u
 
-![](http://7xr8pm.com1.z0.glb.clouddn.com/screenShot.png)
+![](http://7xr8pm.com1.z0.glb.clouddn.com/wechatplus.png)
 
 目前界面部分基本来源于 @Coffcer 的 [vue-chat](https://github.com/Coffcer/vue-chat)，感谢！
 

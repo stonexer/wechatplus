@@ -53,8 +53,7 @@
 
 import {
   changeSearchQuery
-}
-from '../../vuex/actions'
+} from '../../vuex/actions'
 
 export default {
   props: ['user'],
