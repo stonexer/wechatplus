@@ -61,7 +61,7 @@ export default {
   props: ['sessionIndex', 'session'],
   filters: {
     search(list) {
-      return list.filter(item => item.nickname.indexOf(this.query) > -1);
+      return list.filter(item => item.nickname.indexOf(this.query) > -1 || item.py.toLowerCase().indexOf(this.query.toLowerCase()) > -1)
     }
   },
   vuex: {
