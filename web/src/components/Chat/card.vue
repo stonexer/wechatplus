@@ -43,13 +43,16 @@
     <p class="name">{{user.NickName}}</p>
   </header>
   <footer>
-    <input class="search" type="text" placeholder="搜索用户 ..." v-model="query">
+    <input class="search" type="text" placeholder="搜索用户 ..." :value="query" @input="updateQuery">
   </footer>
 </div>
 
 </template>
 
 <script>
+import {
+  getSearchQuery
+} from '../../vuex/getters'
 
 import {
   changeSearchQuery
@@ -58,19 +61,16 @@ import {
 export default {
   props: ['user'],
 
-  data() {
-    return {
-      query: '',
-    }
-  },
-
-  watch: {
-    query () {
-      this.changeSearchQuery(this.query)
+  methods: {
+    updateQuery (e) {
+      this.changeSearchQuery(e.target.value)
     }
   },
 
   vuex: {
+    getters: {
+      query: getSearchQuery
+    },
     actions: {
       changeSearchQuery: changeSearchQuery
     }

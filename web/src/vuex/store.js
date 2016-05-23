@@ -9,6 +9,7 @@ const state = {
 
   user: null,
   memberList: [],
+  groupMemberList: [],
   sessionList: [],
 
   query: '',
@@ -61,22 +62,10 @@ const mutations = {
   },
 
   // 消息
-  TEXTMESSAGE (state, message) {
-    let activeUsername = ''
-    if (!message.FromUserName || message.FromUserName == state.user.UserName) {
-      // 发件人为自己
-      activeUsername = message.ToUserName
-      message.self = true
-      state.sessionList.find(session => session.username === message.ToUserName).messages.push(message)
-    } else if (message.ToUserName === state.user.UserName) {
-      // 收件人为自己
-      activeUsername = message.FromUserName
-      state.sessionList.find(session => session.username === message.FromUserName).messages.push(message)
-    }
-
-    let activeMemberIndex = state.memberList.findIndex(member => member.username === activeUsername)
-    let activeMember = state.memberList.splice(activeMemberIndex, 1)[0]
-    state.memberList.unshift(activeMember)
+  TEXT_MESSAGE (state, message, sessionUser) {
+    state.sessionList
+    .find(session => session.username === sessionUser)
+    .messages.push(message)
   },
 
   // 界面
@@ -86,6 +75,12 @@ const mutations = {
 
   SELECT_MEMBER (state, username) {
     state.session = state.sessionList.find(session => session.username === username)
+  },
+
+  PREPOSITION_MEMBER (state, activeUsername) {
+    let activeMemberIndex = state.memberList.findIndex(member => member.username === activeUsername)
+    let activeMember = state.memberList.splice(activeMemberIndex, 1)[0]
+    state.memberList.unshift(activeMember)
   }
 }
 

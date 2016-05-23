@@ -37,7 +37,24 @@ export const wechatStart = function ({
   wechat.on('error', err => console.log(err))
 
   wechat.on('text-message', message => {
-    dispatch('TEXTMESSAGE', message)
+    let sessionUser = ''
+
+    if (message.FromUserName === state.user.UserName) {
+      // 发件人为自己
+      message.self = true
+      sessionUser = message.ToUserName
+    } else if (message.FromUserName.substr(0,2) === '@@') {
+      // 群消息
+      sessionUser = message.FromUserName
+      let textData = message.Content.split(':<br/>')
+      [message.FromUserName, message.Content]  == textData
+    } else if (message.ToUserName === state.user.UserName) {
+      // 收件人为自己
+      sessionUser = message.FromUserName
+    }
+
+    dispatch('TEXT_MESSAGE', message, sessionUser)
+    dispatch('PREPOSITION_MEMBER', sessionUser)
   })
 
   wechat.start().catch(err => {
@@ -52,11 +69,13 @@ export const sendMessage = function ({
 }, content, to) {
   wechat.sendMsg(content, to)
 
-  dispatch('TEXTMESSAGE', {
+  dispatch('TEXT_MESSAGE', {
     ToUserName: to,
+    self: true,
     Content: content,
     CreateTime: +new Date() / 1000
-  })
+  }, to)
+  dispatch('PREPOSITION_MEMBER', to)
 }
 
 export const changeSearchQuery = function ({
@@ -71,4 +90,6 @@ export const selectMember = function ({
   state
 }, username) {
   dispatch('SELECT_MEMBER', username)
+  dispatch('PREPOSITION_MEMBER', username)
+  dispatch('CHANGE_SEARCH_QUERY', '')
 }

@@ -90,8 +90,7 @@ export default {
   props: ['session', 'user'],
   computed: {
     sessionUser() {
-      let users = this.memberList.filter(item => item.username === this.session.username)
-      return users[0]
+      return this.memberList.find(item => item.username === this.session.username)
     }
   },
   filters: {
