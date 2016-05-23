@@ -23,21 +23,9 @@ const mutations = {
     state.uuid = uuid
     state.wechatState = 'uuid'
   },
-
-  SCAN (state) {
-    state.wechatState = 'scan'
-  },
-
-  CONFIRM (state) {
-    state.wechatState = 'confirm'
-  },
-
-  LOGIN (state) {
-    state.wechatState = 'login'
-  },
-
-  LOGINERROR (state, err) {
-    state.wechatState = 'init'
+  
+  WECHAT_STATE (state, wechatState) {
+    state.wechatState = state.wechatState
   },
 
   // 用户数据

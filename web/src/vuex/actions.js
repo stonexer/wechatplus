@@ -13,11 +13,11 @@ export const wechatStart = function ({
   })
 
   wechat.on('scan', () => {
-    dispatch('SCAN')
+    dispatch('WECHAT_STATE', 'scan')
   })
 
   wechat.on('confirm', () => {
-    dispatch('CONFIRM')
+    dispatch('WECHAT_STATE', 'confirm')
   })
 
   wechat.on('login', () => {
@@ -25,13 +25,13 @@ export const wechatStart = function ({
 
     setTimeout(() => {
       dispatch('FRIEND_LIST', wechat.friendList)
-      dispatch('LOGIN')
+      dispatch('WECHAT_STATE', 'login')
     },0)
   })
 
   wechat.on('logout', () => {
     wechat = null
-    dispatch('LOGINERROR')
+    dispatch('WECHAT_STATE', 'init')
   })
 
   wechat.on('error', err => console.log(err))
